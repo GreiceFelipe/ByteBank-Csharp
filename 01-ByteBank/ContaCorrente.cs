@@ -4,36 +4,10 @@ namespace ByteBank
     public class ContaCorrente
     {
         public Cliente Titular { get; set; }
-        public int Numero { get; set; }
-       
-        public static int TotalDeContasCriadas { get; private set; }
-
-
-        public ContaCorrente(int agencia, int numero)
-        {
-            Agencia = agencia;
-            Numero = numero;
-            TotalDeContasCriadas++;
-        }
-
-        private int _agencia;
-        public int Agencia
-        {
-            get
-            {
-                return _agencia;
-            }
-            set
-            {
-                if(value >= 0)
-                {
-                    _agencia = value;
-                }
-            }
-        }
-
+        public int Agencia { get; }
+        public int Numero { get; }
         private double _saldo;
-        public Double Saldo
+        public double Saldo
         {
             get
             {
@@ -41,12 +15,33 @@ namespace ByteBank
             }
             set
             {
-                if(value > 0)
+                if (value > 0)
                 {
                     _saldo = value;
                 }
             }
         }
+
+        public static int TotalDeContasCriadas { get; private set; }
+
+
+        public ContaCorrente(int agencia, int numero)
+        {
+            if(agencia <= 0)
+            {
+                throw new ArgumentException("O argumento agencia deve ser maior que 0.", nameof(agencia));
+            }
+            if(numero <= 0)
+            {
+                throw new ArgumentException("O argumento numero deve ser maior que 0.", nameof(numero));
+            }
+
+            Agencia = agencia;
+            Numero = numero;
+            TotalDeContasCriadas++;
+        }
+
+
 
         public void Depositar(double valor)
         {

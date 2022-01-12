@@ -8,6 +8,31 @@ namespace ByteBank
         {
             Console.WriteLine("Executanto ByteBank");
 
+            LancaExcessao();
+            TestaContas();
+
+
+
+            Console.ReadLine();
+        }
+
+        public static void LancaExcessao()
+        {
+            try
+            {
+                ContaCorrente conta = new ContaCorrente(0, 0);
+
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.ParamName);
+            }
+
+        }
+
+        public static void TestaContas()
+        {
             Console.WriteLine(ContaCorrente.TotalDeContasCriadas);
 
             ContaCorrente conta = new ContaCorrente(876, 86712540);
@@ -21,8 +46,7 @@ namespace ByteBank
 
             conta.Depositar(200);
             Console.WriteLine(conta.Saldo);
-
-            Console.ReadLine();
         }
+
     }
 }
